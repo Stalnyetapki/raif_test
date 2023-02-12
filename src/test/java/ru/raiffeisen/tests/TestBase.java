@@ -17,7 +17,9 @@ public class TestBase {
     static void setUp() {
         Configuration.baseUrl = System.getProperty("base_url", "https://www.raiffeisen.ru"); ;
         Configuration.browserSize = System.getProperty("browserSize", "1920x1080");
-        Configuration.remote = "https://user1:1234@" + System.getProperty("remoteURL", "selenoid.autotests.cloud/wd/hub");
+        Configuration.remote = "https://" + System.getProperty("login", "user1") + ":"
+                + System.getProperty("password", "1234") + "@"
+                + System.getProperty("remoteURL", "selenoid.autotests.cloud/wd/hub");
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         Configuration.browserCapabilities = capabilities;
