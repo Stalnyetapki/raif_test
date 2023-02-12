@@ -66,7 +66,7 @@ test
 -DremoteURL=${remoteURL}
 ```
 
-## <img src="images/Allure_Report.svg" width="25" height="25"  alt="Allure"/></a> Отчет в <a target="_blank" href="https://jenkins.autotests.cloud/job/berezkindv_performance_lab_complete_project/22/allure/">Allure report</a>
+## <img src="images/Allure_Report.svg" width="25" height="25"  alt="Allure"/></a> Отчет в <a target="_blank" href="https://jenkins.autotests.cloud/job/at_raiff_job/2/allure/">Allure report</a>
 
 ### Основное окно
 
@@ -86,12 +86,6 @@ test
 <img title="Allure Graphics" src="images/allure_graphics.png">
 </p>
 
-### Тест-кейсы
-
-<p align="center">
-<img title="Allure TestOps Tests" src="images/testOps_tests.png">
-</p>
-
 ## <img src="images/Telegram.svg" width="25" height="25"  alt="Allure"/></a> Уведомление в Telegram при помощи бота
 
 <p align="center">
@@ -99,8 +93,8 @@ test
 </p>
 
 
-### <img src="images/Selenoid.svg" width="25" height="25"  alt="Allure"/></a> Примеры видео о прохождении тестов
+### <img src="images/Selenoid.svg" width="25" height="25"  alt="Allure"/></a> Пример видео о прохождении тестов
 
 <p align="center">
-<img title="Selenoid Video" src="images/video1.gif" width="250" height="153"  alt="video"> <img title="Selenoid Video" src="images/video2.gif" width="250" height="153"  alt="video"> <img title="Selenoid Video" src="images/video3.gif" width="250" height="153"  alt="video">
+<img title="Selenoid Video" src="images/video1.gif" width="250" height="153"  alt="video">
 </p>
