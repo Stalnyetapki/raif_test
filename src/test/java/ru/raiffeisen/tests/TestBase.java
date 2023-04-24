@@ -3,28 +3,37 @@ package ru.raiffeisen.tests;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
+import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import ru.raiffeisen.config.AuthConfig;
+import ru.raiffeisen.config.WebConfig;
 import ru.raiffeisen.helpers.Attach;
 
 import java.util.Map;
 
 public class TestBase {
 
+    private static final WebConfig webConfig = ConfigFactory.create(WebConfig.class, System.getProperties());
+    private static final AuthConfig authConfig = ConfigFactory.create(AuthConfig.class, System.getProperties());
+
     @BeforeAll
     static void setUp() {
-        Configuration.baseUrl = System.getProperty("base_url", "https://www.raiffeisen.ru"); ;
-        Configuration.browserSize = System.getProperty("browserSize", "1920x1080");
-        Configuration.remote = "https://" + System.getProperty("login", "user1") + ":"
-                + System.getProperty("password", "1234") + "@"
-                + System.getProperty("remoteURL", "selenoid.autotests.cloud/wd/hub");
+        Configuration.baseUrl = webConfig.getBaseUrl();
+        Configuration.browser = webConfig.getBrowserName();
+        Configuration.browserSize = webConfig.getBrowserSize();
+        Configuration.browserVersion = webConfig.getBrowserVersion();
+
+        if (webConfig.isRemote()) {
+            Configuration.remote = "https://" + authConfig.getLogin() + ":"
+                    + authConfig.getPassword() + "@"
+                    + webConfig.getRemoteURL();
+        }
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         Configuration.browserCapabilities = capabilities;
-        capabilities.setCapability("browserName", System.getProperty("browserName", "chrome"));
-        capabilities.setCapability("browserVersion", System.getProperty("browserVersion", "100.0"));
         capabilities.setCapability("selenoid:options", Map.<String, Object>of(
                 "enableVNC", true,
                 "enableVideo", true
@@ -39,9 +48,12 @@ public class TestBase {
 
     @AfterEach
     void addAttachments() {
-        Attach.screenshotAs("Last screenshot");
-        Attach.pageSource();
-        Attach.browserConsoleLogs();
-        Attach.addVideo();
+        if (webConfig.isRemote()) {
+            Attach.screenshotAs("Last screenshot");
+            Attach.pageSource();
+            Attach.browserConsoleLogs();
+            Attach.addVideo();
+        }
+
     }
 }
