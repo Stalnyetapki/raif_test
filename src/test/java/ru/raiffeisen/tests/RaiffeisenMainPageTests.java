@@ -44,7 +44,7 @@ public class RaiffeisenMainPageTests extends TestBase{
         });
 
         step("Check menu items in current locale", () -> {
-            $$(".Headerstyles__Box-sc-1148tul-0.iWlGXa div[data-marker='HeaderItems.HeaderItems.Header.Item']").filter(visible)
+            $$(".Headerstyles__Box-sc-1148tul-0 div[data-marker='HeaderItems.HeaderItems.Header.Item']").filter(visible)
                     .shouldHave(CollectionCondition.texts(menuItems));
         });
     }
@@ -59,7 +59,7 @@ public class RaiffeisenMainPageTests extends TestBase{
             open("/");
         });
         step("Check link existing in footer", () -> {
-            $$(".Linkstyles__Wrapper-sc-1c9c2bd-0.eEJFlF").filterBy(visible).shouldHave(CollectionCondition.itemWithText(link));
+            $$(".Linkstyles__Wrapper-sc-1c9c2bd-0").filterBy(visible).shouldHave(CollectionCondition.itemWithText(link));
         });
     }
 
@@ -87,7 +87,7 @@ public class RaiffeisenMainPageTests extends TestBase{
             open("/");
         });
         step("Open support chat", () -> {
-            $(".Headerstyles__Action-sc-1148tul-3.hrZKGU [data-marker='HeaderWrap.Button_1']").click();
+            $(".Headerstyles__Action-sc-1148tul-3 [data-marker='HeaderWrap.Button_1']").click();
             $("[data-testid='rchat-root-window']").shouldBe(visible);
         });
     }
@@ -101,7 +101,7 @@ public class RaiffeisenMainPageTests extends TestBase{
             open("/");
         });
         step("Open online bank page in new tab", () -> {
-            $(".Headerstyles__Action-sc-1148tul-3.hrZKGU [data-marker='HeaderWrap.Button_2']").click();
+            $(".Headerstyles__Action-sc-1148tul-3 [data-marker='HeaderWrap.Button_2']").click();
             Selenide.switchTo().window(1);
             webdriver().shouldHave(url("https://online.raiffeisen.ru/login/main"));
         });
