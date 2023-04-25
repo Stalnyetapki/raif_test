@@ -21,6 +21,8 @@ public class TestBase {
 
     @BeforeAll
     static void setUp() {
+
+        SelenideLogger.addListener("allure", new AllureSelenide());
         Configuration.baseUrl = webConfig.getBaseUrl();
         Configuration.browser = webConfig.getBrowserName();
         Configuration.browserSize = webConfig.getBrowserSize();
@@ -30,30 +32,22 @@ public class TestBase {
             Configuration.remote = "https://" + authConfig.getLogin() + ":"
                     + authConfig.getPassword() + "@"
                     + webConfig.getRemoteURL();
+
+            DesiredCapabilities capabilities = new DesiredCapabilities();
+            capabilities.setCapability("selenoid:options", Map.<String, Object>of(
+                    "enableVNC", true,
+                    "enableVideo", true
+            ));
+            Configuration.browserCapabilities = capabilities;
         }
-
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        Configuration.browserCapabilities = capabilities;
-        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
-                "enableVNC", true,
-                "enableVideo", true
-        ));
     }
-
-    @BeforeEach
-    void beforeEach(){
-        SelenideLogger.addListener("allure", new AllureSelenide());
-    }
-
 
     @AfterEach
     void addAttachments() {
-        if (webConfig.isRemote()) {
             Attach.screenshotAs("Last screenshot");
             Attach.pageSource();
             Attach.browserConsoleLogs();
             Attach.addVideo();
-        }
 
     }
 }

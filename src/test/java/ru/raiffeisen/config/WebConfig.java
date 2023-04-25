@@ -13,12 +13,15 @@ public interface WebConfig extends Config {
     String getBaseUrl();
 
     @Key("browser_size")
+    @DefaultValue("1920x1080")
     String getBrowserSize();
 
     @Key("browser_name")
+    @DefaultValue("chrome")
     String getBrowserName();
 
     @Key("browser_version")
+    @DefaultValue("100.0")
     String getBrowserVersion();
 
     @Key("is_remote")
